@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.TestResultMapper">
+    
+    <resultMap type="TestResult" id="TestResultResult">
+        <result property="id"    column="id"    />
+        <result property="score"    column="score"    />
+        <result property="shouldPserson"    column="should_pserson"    />
+        <result property="actualPerson"    column="actual_person"    />
+        <result property="perWork"    column="per_work"    />
+        <result property="startTime"    column="start_time"    />
+        <result property="endTime"    column="end_time"    />
+    </resultMap>
+
+    <sql id="selectTestResultVo">
+        select id, score, should_pserson, actual_person, per_work, start_time, end_time from test_result
+    </sql>
+
+    <select id="selectTestResultList" parameterType="TestResult" resultMap="TestResultResult">
+        <include refid="selectTestResultVo"/>
+        <where>  
+            <if test="score != null "> and score = #{score}</if>
+            <if test="shouldPserson != null "> and should_pserson = #{shouldPserson}</if>
+            <if test="actualPerson != null "> and actual_person = #{actualPerson}</if>
+            <if test="perWork != null  and perWork != ''"> and per_work = #{perWork}</if>
+            <if test="startTime != null "> and start_time = #{startTime}</if>
+            <if test="endTime != null "> and end_time = #{endTime}</if>
+        </where>
+    </select>
+    
+    <select id="selectTestResultById" parameterType="Long" resultMap="TestResultResult">
+        <include refid="selectTestResultVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertTestResult" parameterType="TestResult" useGeneratedKeys="true" keyProperty="id">
+        insert into test_result
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="score != null">score,</if>
+            <if test="shouldPserson != null">should_pserson,</if>
+            <if test="actualPerson != null">actual_person,</if>
+            <if test="perWork != null">per_work,</if>
+            <if test="startTime != null">start_time,</if>
+            <if test="endTime != null">end_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="score != null">#{score},</if>
+            <if test="shouldPserson != null">#{shouldPserson},</if>
+            <if test="actualPerson != null">#{actualPerson},</if>
+            <if test="perWork != null">#{perWork},</if>
+            <if test="startTime != null">#{startTime},</if>
+            <if test="endTime != null">#{endTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTestResult" parameterType="TestResult">
+        update test_result
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="score != null">score = #{score},</if>
+            <if test="shouldPserson != null">should_pserson = #{shouldPserson},</if>
+            <if test="actualPerson != null">actual_person = #{actualPerson},</if>
+            <if test="perWork != null">per_work = #{perWork},</if>
+            <if test="startTime != null">start_time = #{startTime},</if>
+            <if test="endTime != null">end_time = #{endTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTestResultById" parameterType="Long">
+        delete from test_result where id = #{id}
+    </delete>
+
+    <delete id="deleteTestResultByIds" parameterType="String">
+        delete from test_result where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

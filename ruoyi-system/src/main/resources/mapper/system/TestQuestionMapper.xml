@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.TestQuestionMapper">
+    
+    <resultMap type="TestQuestion" id="TestQuestionResult">
+        <result property="id"    column="id"    />
+        <result property="questionName"    column="question_name"    />
+        <result property="model"    column="model"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="question"    column="question"    />
+        <result property="key"    column="key"    />
+    </resultMap>
+
+    <sql id="selectTestQuestionVo">
+        select id, question_name, model, create_time, question, key from test_question
+    </sql>
+
+    <select id="selectTestQuestionList" parameterType="TestQuestion" resultMap="TestQuestionResult">
+        <include refid="selectTestQuestionVo"/>
+        <where>  
+            <if test="questionName != null  and questionName != ''"> and question_name like concat('%', #{questionName}, '%')</if>
+            <if test="model != null  and model != ''"> and model = #{model}</if>
+            <if test="question != null  and question != ''"> and question = #{question}</if>
+            <if test="key != null  and key != ''"> and key = #{key}</if>
+        </where>
+    </select>
+    
+    <select id="selectTestQuestionById" parameterType="Long" resultMap="TestQuestionResult">
+        <include refid="selectTestQuestionVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertTestQuestion" parameterType="TestQuestion" useGeneratedKeys="true" keyProperty="id">
+        insert into test_question
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="questionName != null">question_name,</if>
+            <if test="model != null">model,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="question != null">question,</if>
+            <if test="key != null">key,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="questionName != null">#{questionName},</if>
+            <if test="model != null">#{model},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="question != null">#{question},</if>
+            <if test="key != null">#{key},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTestQuestion" parameterType="TestQuestion">
+        update test_question
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="questionName != null">question_name = #{questionName},</if>
+            <if test="model != null">model = #{model},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="question != null">question = #{question},</if>
+            <if test="key != null">key = #{key},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTestQuestionById" parameterType="Long">
+        delete from test_question where id = #{id}
+    </delete>
+
+    <delete id="deleteTestQuestionByIds" parameterType="String">
+        delete from test_question where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

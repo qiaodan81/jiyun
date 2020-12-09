@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.SchoolTeacherMapper">
+    
+    <resultMap type="SchoolTeacher" id="SchoolTeacherResult">
+        <result property="id"    column="id"    />
+        <result property="leaderName"    column="leader_name"    />
+        <result property="teacherName"    column="teacher_name"    />
+        <result property="gardeid"    column="gardeid"    />
+    </resultMap>
+
+    <sql id="selectSchoolTeacherVo">
+        select id, leader_name, teacher_name, gardeid from school_teacher
+    </sql>
+
+    <select id="selectSchoolTeacherList" parameterType="SchoolTeacher" resultMap="SchoolTeacherResult">
+        <include refid="selectSchoolTeacherVo"/>
+        <where>  
+            <if test="leaderName != null  and leaderName != ''"> and leader_name like concat('%', #{leaderName}, '%')</if>
+            <if test="teacherName != null  and teacherName != ''"> and teacher_name like concat('%', #{teacherName}, '%')</if>
+            <if test="gardeid != null "> and gardeid = #{gardeid}</if>
+        </where>
+    </select>
+    
+    <select id="selectSchoolTeacherById" parameterType="Long" resultMap="SchoolTeacherResult">
+        <include refid="selectSchoolTeacherVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertSchoolTeacher" parameterType="SchoolTeacher" useGeneratedKeys="true" keyProperty="id">
+        insert into school_teacher
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="leaderName != null">leader_name,</if>
+            <if test="teacherName != null">teacher_name,</if>
+            <if test="gardeid != null">gardeid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="leaderName != null">#{leaderName},</if>
+            <if test="teacherName != null">#{teacherName},</if>
+            <if test="gardeid != null">#{gardeid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSchoolTeacher" parameterType="SchoolTeacher">
+        update school_teacher
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="leaderName != null">leader_name = #{leaderName},</if>
+            <if test="teacherName != null">teacher_name = #{teacherName},</if>
+            <if test="gardeid != null">gardeid = #{gardeid},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteSchoolTeacherById" parameterType="Long">
+        delete from school_teacher where id = #{id}
+    </delete>
+
+    <delete id="deleteSchoolTeacherByIds" parameterType="String">
+        delete from school_teacher where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>
