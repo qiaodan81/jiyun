@@ -7,15 +7,37 @@
 <body class="white-bg">
     <div class="wrapper wrapper-content animated fadeInRight ibox-content">
         <form class="form-horizontal m" id="form-plan-add">
+            <div class="col-sm-8">
+                <label class="col-sm-5 control-label">方向id：</label>
+                <select class="form-control" name="">
+                    <option>选项 1</option>
+                    <option>选项 2</option>
+                    <option>选项 3</option>
+                    <option>选项 4</option>
+                </select>
+            </div>
+            <div class="col-sm-8">
+                <label class="col-sm-3 control-label">班級號：</label>
+                <label class="check-box">
+                    <input type="checkbox" value="option1" id="inlineCheckbox1">选项1</label>
+                <label class="check-box">
+                    <input type="checkbox" value="option2" id="inlineCheckbox2">选项2</label>
+                <label class="check-box">
+                    <input type="checkbox" value="option3" id="inlineCheckbox3">选项3</label>
+            </div>
             <div class="form-group">    
-                <label class="col-sm-3 control-label">某某计划名：</label>
-                <div class="col-sm-8">
+                <label class="col-sm-3 control-label">使用的測評表：</label>
+                <div class="col-sm-5">
                     <input name="planName" class="form-control" type="text">
                 </div>
             </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">教學週期：</label>
+                <input type="text" name="" class="col-sm-3" placeholder="请输入文本">
+            </div>
             <div class="form-group">    
                 <label class="col-sm-3 control-label">开始时间：</label>
-                <div class="col-sm-8">
+                <div class="col-sm-5">
                     <div class="input-group date">
                         <input name="startime" class="form-control" placeholder="yyyy-MM-dd" type="text">
                         <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
@@ -24,35 +46,35 @@
             </div>
             <div class="form-group">    
                 <label class="col-sm-3 control-label">结束时间：</label>
-                <div class="col-sm-8">
+                <div class="col-sm-5">
                     <div class="input-group date">
                         <input name="endtime" class="form-control" placeholder="yyyy-MM-dd" type="text">
                         <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                     </div>
                 </div>
             </div>
-            <div class="form-group">    
-                <label class="col-sm-3 control-label">状态，1代表已测评，0代表未测评：</label>
-                <div class="col-sm-8">
-                    <div class="radio-box">
-                        <input type="radio" name="status" value="">
-                        <label th:for="status" th:text="未知"></label>
-                    </div>
-                    <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 代码生成请选择字典属性</span>
-                </div>
-            </div>
-            <div class="form-group">    
-                <label class="col-sm-3 control-label">状态，1代表已测评，0代表未测评：</label>
-                <div class="col-sm-8">
-                    <input name="gradeid" class="form-control" type="text">
-                </div>
-            </div>
-            <div class="form-group">    
-                <label class="col-sm-3 control-label">状态，1代表已测评，0代表未测评：</label>
-                <div class="col-sm-8">
-                    <input name="key" class="form-control" type="text">
-                </div>
-            </div>
+            <!--<div class="form-group">    -->
+                <!--<label class="col-sm-3 control-label">状态，1代表已测评，0代表未测评：</label>-->
+                <!--<div class="col-sm-8">-->
+                    <!--<div class="radio-box">-->
+                        <!--<input type="radio" name="status" value="">-->
+                        <!--<label th:for="status" th:text="未知"></label>-->
+                    <!--</div>-->
+                    <!--<span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 代码生成请选择字典属性</span>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div class="form-group">    -->
+                <!--<label class="col-sm-3 control-label">状态，1代表已测评，0代表未测评：</label>-->
+                <!--<div class="col-sm-8">-->
+                    <!--<input name="gradeid" class="form-control" type="text">-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div class="form-group">    -->
+                <!--<label class="col-sm-3 control-label">状态，1代表已测评，0代表未测评：</label>-->
+                <!--<div class="col-sm-8">-->
+                    <!--<input name="key" class="form-control" type="text">-->
+                <!--</div>-->
+            <!--</div>-->
         </form>
     </div>
     <th:block th:include="include :: footer" />

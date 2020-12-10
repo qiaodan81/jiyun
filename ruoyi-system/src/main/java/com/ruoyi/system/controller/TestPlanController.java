@@ -1,6 +1,8 @@
 package com.ruoyi.system.controller;
 
 import java.util.List;
+
+import com.ruoyi.system.dto.TestPlanDTO;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -44,13 +46,27 @@ public class TestPlanController extends BaseController
     /**
      * 查询测试计划列表
      */
+//    @RequiresPermissions("system:plan:list")
+//    @PostMapping("/list")
+//    @ResponseBody
+//    public TableDataInfo list(TestPlan testPlan)
+//    {
+//        startPage();
+//        List<TestPlan> list = testPlanService.selectTestPlanList(testPlan);
+//        return getDataTable(list);
+//    }
+
+    /**
+     * 查询测试计划列表自己写
+     *
+     */
     @RequiresPermissions("system:plan:list")
     @PostMapping("/list")
     @ResponseBody
-    public TableDataInfo list(TestPlan testPlan)
+    public TableDataInfo list2(TestPlanDTO testPlanDTO)
     {
         startPage();
-        List<TestPlan> list = testPlanService.selectTestPlanList(testPlan);
+        List<TestPlanDTO> list = testPlanService.selectTestPlanList2(testPlanDTO);
         return getDataTable(list);
     }
 

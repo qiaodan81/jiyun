@@ -1,6 +1,8 @@
 package com.ruoyi.system.service.impl;
 
 import java.util.List;
+
+import com.ruoyi.system.dto.TestPlanDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.system.mapper.TestPlanMapper;
@@ -90,5 +92,10 @@ public class TestPlanServiceImpl implements ITestPlanService
     public int deleteTestPlanById(Long id)
     {
         return testPlanMapper.deleteTestPlanById(id);
+    }
+
+    @Override
+    public List<TestPlanDTO> selectTestPlanList2(TestPlanDTO testPlanDTO) {
+        return testPlanMapper.selectTestPlanList2(testPlanDTO);
     }
 }

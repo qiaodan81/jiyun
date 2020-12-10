@@ -34,7 +34,31 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectTestPlanVo"/>
         where id = #{id}
     </select>
-        
+    <!--测试计划查询-->
+    <select id="selectTestPlanList2" resultType="com.ruoyi.system.dto.TestPlanDTO">
+        SELECT
+	tp.id AS testPlanId,
+	tp.plan_name AS planName,
+	tp.startime AS startime,
+	tp.endtime AS endtime,
+	tp.`status` AS testPlanStatus,
+	sg.grade_name AS gradeName,
+	st.leader_name AS leaderName,
+	st.teacher_name AS teacherName,
+	st.gardeid,
+	sg.directionId AS directionid,
+	sg.term,
+	sg.population
+FROM
+	test_plan tp,
+	school_grade sg,
+	school_teacher st
+WHERE
+	tp.gradeid = sg.id
+	AND sg.id = st.gardeid
+
+    </select>
+
     <insert id="insertTestPlan" parameterType="TestPlan" useGeneratedKeys="true" keyProperty="id">
         insert into test_plan
         <trim prefix="(" suffix=")" suffixOverrides=",">

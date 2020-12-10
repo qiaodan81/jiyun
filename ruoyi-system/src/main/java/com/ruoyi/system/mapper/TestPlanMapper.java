@@ -2,6 +2,7 @@ package com.ruoyi.system.mapper;
 
 import java.util.List;
 import com.ruoyi.system.domain.TestPlan;
+import com.ruoyi.system.dto.TestPlanDTO;
 
 /**
  * 测试计划Mapper接口
@@ -58,4 +59,11 @@ public interface TestPlanMapper
      * @return 结果
      */
     public int deleteTestPlanByIds(String[] ids);
+
+    /**
+     * 测试计划查询
+     * @param testPlanDTO
+     * @return
+     */
+    List<TestPlanDTO> selectTestPlanList2(TestPlanDTO testPlanDTO);
 }

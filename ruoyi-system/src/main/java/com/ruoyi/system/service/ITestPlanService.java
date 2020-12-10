@@ -2,6 +2,7 @@ package com.ruoyi.system.service;
 
 import java.util.List;
 import com.ruoyi.system.domain.TestPlan;
+import com.ruoyi.system.dto.TestPlanDTO;
 
 /**
  * 测试计划Service接口
@@ -58,4 +59,6 @@ public interface ITestPlanService
      * @return 结果
      */
     public int deleteTestPlanById(Long id);
+
+    List<TestPlanDTO> selectTestPlanList2(TestPlanDTO testPlanDTO);
 }

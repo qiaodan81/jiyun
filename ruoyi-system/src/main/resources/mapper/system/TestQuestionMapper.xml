@@ -22,8 +22,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <where>  
             <if test="questionName != null  and questionName != ''"> and question_name like concat('%', #{questionName}, '%')</if>
             <if test="model != null  and model != ''"> and model = #{model}</if>
-            <if test="question != null  and question != ''"> and question = #{question}</if>
-            <if test="key != null  and key != ''"> and key = #{key}</if>
+            <if test="question != null  and question != ''"> and question like concat('%', #{question}, '%')</if>
+            <if test="key != null  and key != ''"> and `key` like concat('%', #{key}, '%')</if>
         </where>
     </select>
     
@@ -39,7 +39,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="model != null">model,</if>
             <if test="createTime != null">create_time,</if>
             <if test="question != null">question,</if>
-            <if test="key != null">key,</if>
+            <if test="key != null">`key`,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="questionName != null">#{questionName},</if>
@@ -49,6 +49,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="key != null">#{key},</if>
          </trim>
     </insert>
+    <!--<insert id="insertTestQuestion" parameterType="TestQuestion" useGeneratedKeys="true" keyProperty="id">-->
+        <!--insert into test_question(question_name,model,create_time,question,`key`) values (#{questionName},#{model},#{createTime},#{question},#{key})-->
+    <!--</insert>-->
 
     <update id="updateTestQuestion" parameterType="TestQuestion">
         update test_question
@@ -57,7 +60,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="model != null">model = #{model},</if>
             <if test="createTime != null">create_time = #{createTime},</if>
             <if test="question != null">question = #{question},</if>
-            <if test="key != null">key = #{key},</if>
+            <if test="key != null">`key` = #{key},</if>
         </trim>
         where id = #{id}
     </update>
