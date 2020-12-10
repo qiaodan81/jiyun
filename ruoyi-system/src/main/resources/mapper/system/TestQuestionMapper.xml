@@ -14,7 +14,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectTestQuestionVo">
-        select id, question_name, model, create_time, question, key from test_question
+        select id, question_name, model, create_time, question, `key` from test_question
     </sql>
 
     <select id="selectTestQuestionList" parameterType="TestQuestion" resultMap="TestQuestionResult">
